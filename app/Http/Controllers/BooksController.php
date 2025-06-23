@@ -12,7 +12,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Books::with('borrow')->get();
+        $books = Books::with('category')->get();
         return response()->json($books);
     }
 

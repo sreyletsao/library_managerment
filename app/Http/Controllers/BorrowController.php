@@ -13,7 +13,7 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        $borrow= Borrow::all();
+        $borrow= Borrow::with(['book', 'user'])->get();
         return Response()->json($borrow,200);
     }
 
