@@ -14,7 +14,7 @@ class BorrowController extends Controller
     public function index()
     {
         $borrow= Borrow::all();
-        return Response()->json($borrow,201);
+        return Response()->json($borrow,200);
     }
 
     /**
