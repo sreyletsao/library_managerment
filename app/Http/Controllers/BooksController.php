@@ -12,7 +12,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        $books = Books::with('borrow')->get();
+        return response()->json($books);
     }
 
     /**
@@ -20,7 +21,13 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+        $books = Books::create($request->all());
+        return response()->json($books);
+
     }
 
     /**
@@ -28,7 +35,7 @@ class BooksController extends Controller
      */
     public function show(Books $books)
     {
-        //
+        return response()->json($books);
     }
 
     /**
@@ -36,7 +43,8 @@ class BooksController extends Controller
      */
     public function update(Request $request, Books $books)
     {
-        //
+        $books->update($request->all());
+        return response()->json($books, 200);
     }
 
     /**
@@ -44,6 +52,7 @@ class BooksController extends Controller
      */
     public function destroy(Books $books)
     {
-        //
+        $books->delete();
+        return response()->json(['message' => 'Book deleted']);
     }
 }
