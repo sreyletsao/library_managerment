@@ -24,8 +24,12 @@ class BorrowController extends Controller
     {
         $request->validate([
             'book_name'=> 'required|string|max:225',
-            'book_id' => 'required|interger'
+            'book_id' => 'required|exists:books,id',
+            'user_id' => 'required|exists:users,id'
+            
         ]);
+        $borrow= Borrow::create($request->all());
+        return response()->json($borrow,201);
     }
 
     /**
@@ -33,7 +37,7 @@ class BorrowController extends Controller
      */
     public function show(Borrow $borrow)
     {
-        //
+        return response()->json($borrow);
     }
 
     /**
@@ -41,7 +45,8 @@ class BorrowController extends Controller
      */
     public function update(Request $request, Borrow $borrow)
     {
-        //
+        $borrow->update($request->all());
+        return response()->json($borrow,200);
     }
 
     /**
@@ -49,6 +54,7 @@ class BorrowController extends Controller
      */
     public function destroy(Borrow $borrow)
     {
-        //
+        $borrow->delete();
+        return response()->json(['message'=> 'Borrow record deleted successfully']);
     }
 }

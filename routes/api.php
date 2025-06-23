@@ -1,10 +1,8 @@
 <?php
-<<<<<<< HEAD
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\BorrowController;
 
-=======
 use \App\Http\Controllers\BooksController;
->>>>>>> 6b29979420e0492c56ccef5989c42bb0d42c4cb0
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-<<<<<<< HEAD
 Route::apiResource('stocks', StockController::class);
-=======
 Route::apiResource('books', BooksController::class);
->>>>>>> 6b29979420e0492c56ccef5989c42bb0d42c4cb0
+Route::apiResource('borrow', BorrowController::class);
