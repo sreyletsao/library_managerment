@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrow;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class BorrowController extends Controller
 {
@@ -12,7 +13,8 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        //
+        $borrow= Borrow::all();
+        return Response()->json($borrow,201);
     }
 
     /**
@@ -20,7 +22,10 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'book_name'=> 'required|string|max:225',
+            'book_id' => 'required|interger'
+        ]);
     }
 
     /**
